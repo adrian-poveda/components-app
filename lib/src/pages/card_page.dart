@@ -10,7 +10,10 @@ class CardPage extends StatelessWidget {
         padding: EdgeInsets.all(10),
         //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
         children: [
-          _cardFirstType()
+          _cardFirstType(),
+          SizedBox(height: 10),
+          _cardSecondType(),
+          SizedBox(height: 10)
         ],
       ),
     );
@@ -44,6 +47,28 @@ class CardPage extends StatelessWidget {
    );
 
 
+
+  }
+
+  Widget _cardSecondType() {
+
+    return Card(
+      child: Column(
+        children: [
+          FadeInImage(
+            image: NetworkImage('https://www.yourtrainingedge.com/wp-content/uploads/2019/05/background-calm-clouds-747964.jpg'),
+            placeholder: AssetImage('assets/original.gif'),
+            fadeInDuration: Duration(milliseconds: 400),
+            height: 300,
+            fit: BoxFit.cover
+          ),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Text('Image description'),
+          )
+        ],
+      ),
+    );
 
   }
 }
