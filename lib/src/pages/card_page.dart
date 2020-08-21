@@ -11,9 +11,21 @@ class CardPage extends StatelessWidget {
         //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
         children: [
           _cardFirstType(),
-          SizedBox(height: 10),
+          SizedBox(height: 33),
           _cardSecondType(),
-          SizedBox(height: 10)
+          SizedBox(height: 33),
+          _cardFirstType(),
+          SizedBox(height: 33),
+          _cardSecondType(),
+          SizedBox(height: 33),
+          _cardFirstType(),
+          SizedBox(height: 33),
+          _cardSecondType(),
+          SizedBox(height: 33),
+          _cardFirstType(),
+          SizedBox(height: 33),
+          _cardSecondType(),
+          SizedBox(height: 33),
         ],
       ),
     );
@@ -22,6 +34,8 @@ class CardPage extends StatelessWidget {
  Widget _cardFirstType() {
 
    return Card(
+     elevation: 10,
+     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
      child: Column(
        children: [
          ListTile(
@@ -52,7 +66,9 @@ class CardPage extends StatelessWidget {
 
   Widget _cardSecondType() {
 
-    return Card(
+    final card = Container(
+      //clipBehavior: Clip.antiAlias, //Para que nada se salga de la tarjeta
+      color: Colors.white,
       child: Column(
         children: [
           FadeInImage(
@@ -67,6 +83,25 @@ class CardPage extends StatelessWidget {
             child: Text('Image description'),
           )
         ],
+      ),
+    );
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        //color: Colors.red
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10,
+            spreadRadius: 2,
+            offset: Offset(2, 10)
+          )
+        ]
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(25),
+        child: card,
       ),
     );
 

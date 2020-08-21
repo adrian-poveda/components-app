@@ -40,6 +40,8 @@ class HomePage extends StatelessWidget {
 
     final List<Widget> widgetList = [];
 
+    if (data == null ){ return []; }
+
     data.forEach( (opt) {
       final currentWidget = ListTile(
         title: Text(opt['texto']),
