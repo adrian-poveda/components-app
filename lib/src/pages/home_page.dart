@@ -1,3 +1,4 @@
+import 'package:components_app/src/pages/alert_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:components_app/src/providers/menu_provider.dart';
@@ -24,7 +25,7 @@ class HomePage extends StatelessWidget {
       builder: ( context , AsyncSnapshot<List<dynamic>> snapshot ){
 
         return ListView(
-          children: _itemsList(snapshot.data),
+          children: _itemsList(snapshot.data, context),
         );
       },
     );
@@ -35,7 +36,7 @@ class HomePage extends StatelessWidget {
 
   }
 
-  List<Widget> _itemsList(List<dynamic> data) {
+  List<Widget> _itemsList(List<dynamic> data, BuildContext context) {
 
     final List<Widget> widgetList = [];
 
@@ -44,7 +45,15 @@ class HomePage extends StatelessWidget {
         title: Text(opt['texto']),
         leading: getIcon(opt['icon']),
         trailing: Icon(Icons.arrow_forward_ios),
-        onTap: () {},
+        onTap: () {
+
+          final route = MaterialPageRoute(
+            builder: ( context ){
+              return AlertPage();
+            }
+          );
+          Navigator.push(context, route);
+        },
       );
 
       widgetList..add(currentWidget)
