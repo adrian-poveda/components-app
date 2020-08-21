@@ -1,5 +1,7 @@
-import 'package:components_app/src/providers/menu_provider.dart';
 import 'package:flutter/material.dart';
+
+import 'package:components_app/src/providers/menu_provider.dart';
+import 'package:components_app/src/utils/icon_string_util.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -40,7 +42,7 @@ class HomePage extends StatelessWidget {
     data.forEach( (opt) {
       final currentWidget = ListTile(
         title: Text(opt['texto']),
-        leading: Icon(Icons.add),
+        leading: getIcon(opt['icon']),
         trailing: Icon(Icons.arrow_forward_ios),
         onTap: () {},
       );
