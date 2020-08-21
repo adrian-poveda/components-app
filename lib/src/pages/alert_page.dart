@@ -10,7 +10,7 @@ class AlertPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.arrow_back_ios),
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.pop(context); //Para volver a la pantalla anterior
         },
       ),
     );

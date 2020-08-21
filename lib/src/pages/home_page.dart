@@ -1,4 +1,4 @@
-import 'package:components_app/src/pages/alert_page.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:components_app/src/providers/menu_provider.dart';
@@ -47,12 +47,13 @@ class HomePage extends StatelessWidget {
         trailing: Icon(Icons.arrow_forward_ios),
         onTap: () {
 
-          final route = MaterialPageRoute(
-            builder: ( context ){
-              return AlertPage();
-            }
-          );
-          Navigator.push(context, route);
+          Navigator.pushNamed(context, opt['ruta']);
+          //final route = MaterialPageRoute(
+            //builder: ( context ){
+              //return AlertPage();
+            //}
+          //);
+          //Navigator.push(context, route);
         },
       );
 
