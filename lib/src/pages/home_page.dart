@@ -17,8 +17,6 @@ class HomePage extends StatelessWidget {
 
   Widget _list() {
 
-    //print(menuProvider.options);
-    //menuProvider.dataLoad();
     return FutureBuilder(
       future: menuProvider.dataLoad(), //Lo que nosotros esperamos
       initialData: [], //Lista vacía inicialmente
@@ -29,18 +27,11 @@ class HomePage extends StatelessWidget {
         );
       },
     );
-
-    //return ListView(
-      //children: _itemsList(),
-    //);
-
   }
 
   List<Widget> _itemsList(List<dynamic> data, BuildContext context) {
 
     final List<Widget> widgetList = [];
-
-    if (data == null ){ return []; }
 
     data.forEach( (opt) {
       final currentWidget = ListTile(
