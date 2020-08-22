@@ -152,7 +152,7 @@ class _InputsPageState extends State<InputsPage> {
     DateTime picked = await showDatePicker(
       context: context,
       initialDate: dateTime,
-      //initialDate: new DateTime.now(),
+      locale: Locale('en', 'US'),
       firstDate: new DateTime(2018),
       lastDate: new DateTime(2025),
     ); //porque devuelve un Future
