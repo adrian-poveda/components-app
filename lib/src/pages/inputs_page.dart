@@ -15,6 +15,8 @@ class _InputsPageState extends State<InputsPage> {
   String _finalSelectedDate = '';
   DateTime dateTime = DateTime.now();
   TextEditingController _inputDateTimeController = new TextEditingController();
+  List<String> _powers = ['Fly', 'X Rays', 'Superpower'];
+  String _selectedPower = 'Fly';
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,8 @@ class _InputsPageState extends State<InputsPage> {
           _createPasswordInput(),
           Divider(),
           _createDateInput(context),
+          Divider(),
+          _createDropdown(),
           Divider(),
           _createPerson()        
         ],
@@ -65,15 +69,7 @@ class _InputsPageState extends State<InputsPage> {
 
   }
 
-  Widget _createPerson() {
 
-
-    return ListTile(
-      title: Text('$_name'),
-      subtitle: Text('$_email'),
-    );
-
-  }
 
   Widget _createEmailInput() {
 
@@ -152,7 +148,7 @@ class _InputsPageState extends State<InputsPage> {
     DateTime picked = await showDatePicker(
       context: context,
       initialDate: dateTime,
-      locale: Locale('en', 'US'),
+      locale: Locale('es', 'ES'),
       firstDate: new DateTime(2018),
       lastDate: new DateTime(2025),
     ); //porque devuelve un Future
@@ -165,5 +161,61 @@ class _InputsPageState extends State<InputsPage> {
         _inputDateTimeController.text = _finalSelectedDate;
       });
     }
+  }
+
+  List<DropdownMenuItem<String>> getOptionsDropdown(){
+      List<DropdownMenuItem<String>> list = new List();
+      _powers.forEach((power){
+        list.add(DropdownMenuItem(
+          child: Text(power),
+          value: power,
+
+        ));
+      });
+      return list;
+}
+
+Widget _createDropdown() {
+
+    return Row(
+      children: [
+        Icon(Icons.select_all, size: 50),
+        SizedBox(width: 30),
+        Expanded(
+                  child: DropdownButton(
+            value: _selectedPower,
+            items: getOptionsDropdown(),
+            onChanged: (opt){
+              setState(() {
+                _selectedPower = opt;
+              });
+            },
+          ),
+        )
+      ],
+    );
+
+    // return DropdownButton(
+    //   value: _selectedPower,
+    //   items: getOptionsDropdown(),
+    //   onChanged: (opt){
+    //     setState(() {
+    //       _selectedPower = opt;
+    //     });
+        
+    //   },
+    // );
+  }
+
+
+    Widget _createPerson() {
+
+
+    return ListTile(
+      title: Text('$_name'),
+      subtitle: Text('$_email'),
+      trailing: Text('$_selectedPower'),
+    );
+
   }
 }
