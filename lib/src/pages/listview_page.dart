@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+
+
 
 class ListviewPage extends StatefulWidget {
   ListviewPage({Key key}) : super(key: key);
@@ -12,6 +15,7 @@ class _ListviewPageState extends State<ListviewPage> {
 
   List<int> _numList = new List();
   int _lastImage  = 0;
+  bool _isloading = false;
 
   @override
   void initState() {
@@ -21,9 +25,16 @@ class _ListviewPageState extends State<ListviewPage> {
 
     _scrollController.addListener((){
       if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
-         _add10Images();
+         //_add10Images();
+         fetchData();
       }
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose(); //Prevenir fugas de memoria
   }
 
   @override
@@ -32,7 +43,13 @@ class _ListviewPageState extends State<ListviewPage> {
       appBar: AppBar(
         title: Text('Lists'),
       ),
-      body: _createList()
+      body: Stack(
+        children: [
+          _createList(),
+          _createLoading()
+        ],
+      )
+      
     );
   }
 
@@ -66,5 +83,47 @@ class _ListviewPageState extends State<ListviewPage> {
       
     });
 
+  }
+
+  Future<Null> fetchData() async{
+    //Simular un delay antes de recoger los siguientes registros
+    _isloading = true;
+    setState(() {});
+
+    final duration = new Duration(seconds: 2);
+    return new Timer(duration, http_response); //Cuando pasen los 2 segundos, lanzar el método de abajo
+
+  }
+
+  void http_response() {
+
+    _isloading = false; //Porque ya he terminado de cargar
+    _add10Images();
+    _scrollController.animateTo(
+      _scrollController.position.pixels + 100,
+      curve: Curves.fastOutSlowIn,
+      duration: Duration(milliseconds: 250)
+    );
+
+  }
+
+  Widget _createLoading() {
+
+    if(_isloading){
+      return Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator()
+          ],),
+          SizedBox(height: 15)
+        ],
+      );
+    }else{
+      return Container();
+    }
   }
 }
